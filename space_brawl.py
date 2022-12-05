@@ -2,6 +2,7 @@ import sys
 import pygame
 
 from settings import Settings
+from spaceship import SpaceShip
 
 
 class SpaceBrawl:
@@ -16,6 +17,9 @@ class SpaceBrawl:
         self.screen = pygame.display.set_mode((self.settings.main_length, self.settings.main_width))
         pygame.display.set_caption("Space Brawl")
 
+        # Setup spaceship.
+        self.ship = SpaceShip(self)
+
     def run_game(self):
         """The main game loop."""
         while True:
@@ -24,10 +28,11 @@ class SpaceBrawl:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-            # Paints main surface.
+            # Update main screen
             self.screen.fill(self.settings.background_color)
+            self.ship.blitme()
 
-            # Updates main surface.
+            # Display updated screen
             pygame.display.flip()
 
 
