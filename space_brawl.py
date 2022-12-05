@@ -23,17 +23,24 @@ class SpaceBrawl:
     def run_game(self):
         """The main game loop."""
         while True:
-            # Exit condition.
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._manage_events()
+            self._update_screen()
 
-            # Update main screen
-            self.screen.fill(self.settings.background_color)
-            self.ship.blitme()
+    def _manage_events(self):
+        """Helper method to manage to user events."""
+        # Exit condition.
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
 
-            # Display updated screen
-            pygame.display.flip()
+    def _update_screen(self):
+        """Helper method to update main surface and flip screen."""
+        # Update main screen
+        self.screen.fill(self.settings.background_color)
+        self.ship.blitme()
+
+        # Display updated screen
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
