@@ -7,3 +7,6 @@ class Settings:
         self.main_length = 1200
         self.main_width = 800
         self.background_color = (0, 0, 128)
+
+        # Ship
+        self.spaceship_speed = 0.75
