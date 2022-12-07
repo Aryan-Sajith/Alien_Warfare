@@ -17,6 +17,14 @@ class SpaceShip:
         # Spaceship positioned on screen.
         self.spaceship_rectangle.midbottom = self.screen_rectangle.midbottom
 
+        # Continuous movement flags
+        self.moving_right = False
+
     def blitme(self):
         """Draws image to screen at specified position."""
         self.screen.blit(self.image, self.spaceship_rectangle)
+
+    def move_continuously(self):
+        """Updates spaceship position based on movement flag"""
+        if self.moving_right:
+            self.spaceship_rectangle.x += 1

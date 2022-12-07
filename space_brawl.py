@@ -24,6 +24,7 @@ class SpaceBrawl:
         """The main game loop."""
         while True:
             self._manage_events()
+            self.ship.move_continuously()
             self._update_screen()
 
     def _manage_events(self):
@@ -32,9 +33,13 @@ class SpaceBrawl:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Exit condition.
                 sys.exit()
+            # Continuous rightward motion
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    self.ship.spaceship_rectangle.x += 1
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
 
     def _update_screen(self):
         """Helper method to update main surface and flip screen."""
