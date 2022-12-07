@@ -18,6 +18,7 @@ class SpaceShip:
         self.spaceship_rectangle.midbottom = self.screen_rectangle.midbottom
 
         # Continuous movement flags
+        self.moving_left = False
         self.moving_right = False
 
     def blitme(self):
@@ -28,3 +29,5 @@ class SpaceShip:
         """Updates spaceship position based on movement flag"""
         if self.moving_right:
             self.spaceship_rectangle.x += 1
+        if self.moving_left:
+            self.spaceship_rectangle.x -= 1
