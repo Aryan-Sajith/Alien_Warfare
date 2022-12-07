@@ -27,9 +27,17 @@ class SpaceBrawl:
             self.ship.move_continuously()
             self._update_screen()
 
+    def _update_screen(self):
+        """Helper method of run_game to update main surface and flip screen."""
+        # Update main screen
+        self.screen.fill(self.settings.background_color)
+        self.ship.blitme()
+
+        # Display updated screen
+        pygame.display.flip()
+
     def _manage_events(self):
         """Helper method of run_game() to manage user events."""
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Exit condition.
                 sys.exit()
@@ -52,15 +60,6 @@ class SpaceBrawl:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
-
-    def _update_screen(self):
-        """Helper method of run_game to update main surface and flip screen."""
-        # Update main screen
-        self.screen.fill(self.settings.background_color)
-        self.ship.blitme()
-
-        # Display updated screen
-        pygame.display.flip()
 
 
 if __name__ == '__main__':
