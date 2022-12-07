@@ -28,10 +28,13 @@ class SpaceBrawl:
 
     def _manage_events(self):
         """Helper method to manage to user events."""
-        # Exit condition.
+
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:  # Exit condition.
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.spaceship_rectangle.x += 1
 
     def _update_screen(self):
         """Helper method to update main surface and flip screen."""
