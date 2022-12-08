@@ -30,7 +30,7 @@ class SpaceShip:
         self.screen.blit(self.image, self.spaceship_rectangle)
 
     def move_continuously(self):
-        """Updates spaceship position based on movement flag"""
+        """Updates spaceship position based on movement flag and stays within the main screen"""
         # Updates decimal position x
         if self.moving_right and self.spaceship_rectangle.right < self.screen_rectangle.right:
             self.x += self.settings.spaceship_speed
