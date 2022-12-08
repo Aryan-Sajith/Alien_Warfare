@@ -13,8 +13,11 @@ class SpaceBrawl:
         pygame.init()
         self.settings = Settings()
 
-        # Setup main surface.
-        self.screen = pygame.display.set_mode((self.settings.main_length, self.settings.main_width))
+        # Setup main surface as full screen
+        self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        self.settings.main_width = self.screen.get_rect().width
+        self.settings.main_height = self.screen.get_rect().height
+
         pygame.display.set_caption("Space Brawl")
 
         # Setup spaceship.
