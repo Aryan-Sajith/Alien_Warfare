@@ -40,9 +40,9 @@ class SpaceBrawl:
         self.bullets.update()
 
         for bullet in self.bullets.copy():
+            bullet: Bullet
             if bullet.bullet_rectangle.bottom <= 0:
                 self.bullets.remove(bullet)
-        print(len(self.bullets))
 
     def _manage_events(self):
         """Helper method of run_game() to manage user events."""
@@ -81,6 +81,7 @@ class SpaceBrawl:
 
         # Draws bullets
         for bullet in self.bullets.sprites():
+            bullet: Bullet
             bullet.draw_bullet()
 
         # Display updated screen
