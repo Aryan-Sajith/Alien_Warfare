@@ -10,3 +10,9 @@ class Settings:
 
         # Ship
         self.spaceship_speed = 0.75
+
+        # Bullet
+        self.bullet_speed = 0.5
+        self.bullet_width = 4
+        self.bullet_height = 16
+        self.bullet_color = (60, 60, 60)
