@@ -64,7 +64,8 @@ class SpaceBrawl:
         elif event.key == pygame.K_q:  # Another exit condition
             sys.exit()
         elif event.key == pygame.K_SPACE:
-            self._fire_bullet()
+            if len(self.bullets) < self.settings.bullets_limit:
+                self._fire_bullet()
 
     def _fire_bullet(self):
         """Create a new bullet and add it to bullets group"""
