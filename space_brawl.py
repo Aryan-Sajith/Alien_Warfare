@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from spaceship import SpaceShip
 from bullet import Bullet
+from alien import Alien
 
 
 class SpaceBrawl:
@@ -24,8 +25,12 @@ class SpaceBrawl:
         # Setup spaceship.
         self.ship = SpaceShip(self)
 
-        # Setup bullets as a group
+        # Setup bullets & aliens as a Sprite group
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        # Create the fleet of aliens!
+        self._create_fleet()
 
     def run_game(self):
         """The main game loop."""
@@ -34,6 +39,11 @@ class SpaceBrawl:
             self.ship.move_continuously()
             self._update_bullets()
             self._update_screen()
+
+    def _create_fleet(self):
+        """Creates the fleet of aliens."""
+        alien = Alien(self)
+        self.aliens.add(alien)
 
     def _update_bullets(self):
         """Updates bullets on screen and removes old ones"""
@@ -84,6 +94,9 @@ class SpaceBrawl:
         for bullet in self.bullets.sprites():
             bullet: Bullet
             bullet.draw_bullet()
+
+        # Draws aliens
+        self.aliens.draw(self.screen)
 
         # Display updated screen
         pygame.display.flip()
