@@ -42,21 +42,30 @@ class SpaceBrawl:
 
     def _create_fleet(self):
         """Helper method within initializer to creates the fleet of aliens."""
+        # Determine the number of aliens placed horizontally
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.main_width - (2 * alien_width)
         number_aliens_x = available_space_x // (2 * alien_width)
 
-        # Create 1st row of aliens.
-        for alien_number in range(number_aliens_x):
-            self._create_alien(alien_number)
+        # Determine the number of rows of aliens
+        ship_height = self.ship.spaceship_rectangle.height
+        available_space_y = self.settings.main_height - (10 * alien_height) - ship_height
+        number_rows = available_space_y // (2 * alien_height)
 
-    def _create_alien(self, alien_number):
+        # Create the full fleet of aliens.
+        for row_number in range(number_rows):
+            for alien_number in range(number_aliens_x):
+                self._create_alien(alien_number, row_number)
+
+    def _create_alien(self, alien_number, row_number):
         """Helper of  _create_fleet() to create an alien and add it to the row."""
         alien = Alien(self)
-        alien_width = alien.rect.width
-        alien.x = alien_width * (1 + 2.3 * alien_number)
+        alien_width, alien_height = alien.rect.size
+        alien.x = alien_width * (1 + 2 * alien_number)
         alien.rect.x = alien.x
+        alien.y = alien_height * (1 + 2 * row_number)
+        alien.rect.y = alien.y
         self.aliens.add(alien)
 
     def _update_bullets(self):
