@@ -41,7 +41,7 @@ class SpaceBrawl:
             self._update_screen()
 
     def _create_fleet(self):
-        """Creates the fleet of aliens."""
+        """Helper method within initializer to creates the fleet of aliens."""
         alien = Alien(self)
         alien_width = alien.rect.width
         available_space_x = self.settings.main_width - (2 * alien_width)
@@ -49,13 +49,18 @@ class SpaceBrawl:
 
         # Create 1st row of aliens.
         for alien_number in range(number_aliens_x):
-            alien = Alien(self)
-            alien.x = alien_width * (1 + 2.3 * alien_number)
-            alien.rect.x = alien.x
-            self.aliens.add(alien)
+            self._create_alien(alien_number)
+
+    def _create_alien(self, alien_number):
+        """Helper of  _create_fleet() to create an alien and add it to the row."""
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        alien.x = alien_width * (1 + 2.3 * alien_number)
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
 
     def _update_bullets(self):
-        """Updates bullets on screen and removes old ones"""
+        """Helper method for run_game() that updates bullets on screen and removes old ones"""
         self.bullets.update()
 
         for bullet in self.bullets.copy():
