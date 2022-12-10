@@ -43,7 +43,16 @@ class SpaceBrawl:
     def _create_fleet(self):
         """Creates the fleet of aliens."""
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.main_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
+
+        # Create 1st row of aliens.
+        for alien_number in range(number_aliens_x):
+            alien = Alien(self)
+            alien.x = alien_width * (1 + 2.3 * alien_number)
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _update_bullets(self):
         """Updates bullets on screen and removes old ones"""
