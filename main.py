@@ -113,8 +113,24 @@ class SpaceBrawl:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
+    def _check_fleet_edges(self):
+        """Change fleet motion if any alien reaches a screen edge."""
+        for alien in self.aliens.sprites():
+            alien: Alien
+            if alien._check_edges():
+                self._change_fleet_motion()
+                break
+
+    def _change_fleet_motion(self):
+        """Drop the entire fleet and change fleet direction."""
+        for alien in self.aliens.sprites():
+            alien: Alien
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
     def _update_aliens(self):
-        """Updates aliens position by calling update."""
+        """Check if fleet at an edge, then update its position."""
+        self._check_fleet_edges()
         self.aliens.update()
 
     def _update_screen(self):
