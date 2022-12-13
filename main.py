@@ -38,6 +38,7 @@ class SpaceBrawl:
             self._manage_events()
             self.ship.move_continuously()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
     def _create_fleet(self):
@@ -67,6 +68,11 @@ class SpaceBrawl:
         alien.y = alien_height * (1 + 2 * row_number)
         alien.rect.y = alien.y
         self.aliens.add(alien)
+
+    def _fire_bullet(self):
+        """Create a new bullet and add it to bullets group"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
     def _update_bullets(self):
         """Helper method for run_game() that updates bullets on screen and removes old ones"""
@@ -100,10 +106,15 @@ class SpaceBrawl:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
 
-    def _fire_bullet(self):
-        """Create a new bullet and add it to bullets group"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+    def _manage_keyup_events(self, event):
+        """Helper method of _manage_events() that responds to key releases."""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
+    def _update_aliens(self):
+        self.aliens.update()
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
@@ -123,13 +134,6 @@ class SpaceBrawl:
 
         # Display updated screen
         pygame.display.flip()
-
-    def _manage_keyup_events(self, event):
-        """Helper method of _manage_events() that responds to key releases."""
-        if event.key == pygame.K_RIGHT:
-            self.ship.moving_right = False
-        elif event.key == pygame.K_LEFT:
-            self.ship.moving_left = False
 
 
 if __name__ == '__main__':

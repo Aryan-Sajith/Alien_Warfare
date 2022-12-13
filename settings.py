@@ -17,3 +17,6 @@ class Settings:
         self.bullet_height = 16
         self.bullet_color = (255, 0, 0)
         self.bullets_limit = 3
+
+        # Alien
+        self.alien_speed = 1.0
