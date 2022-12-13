@@ -114,6 +114,7 @@ class SpaceBrawl:
             self.ship.moving_left = False
 
     def _update_aliens(self):
+        """Updates aliens position by calling update."""
         self.aliens.update()
 
     def _update_screen(self):
