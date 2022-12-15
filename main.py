@@ -16,9 +16,10 @@ class SpaceBrawl:
         self.settings = Settings()
 
         # Setup main surface as full screen
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.settings.main_width = self.screen.get_rect().width
-        self.settings.main_height = self.screen.get_rect().height
+        # self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        # self.settings.main_width = self.screen.get_rect().width
+        # self.settings.main_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((self.settings.main_width, self.settings.main_height))
 
         pygame.display.set_caption("Space Brawl")
 
@@ -50,7 +51,7 @@ class SpaceBrawl:
         number_aliens_x = available_space_x // (2 * alien_width)
 
         # Determine the number of rows of aliens
-        ship_height = self.ship.spaceship_rectangle.height
+        ship_height = self.ship.rect.height
         available_space_y = self.settings.main_height - (10 * alien_height) - ship_height
         number_rows = available_space_y // (2 * alien_height)
 
