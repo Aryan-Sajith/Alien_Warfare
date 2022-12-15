@@ -40,9 +40,12 @@ class SpaceBrawl:
         """The main game loop."""
         while True:
             self._manage_events()
-            self.ship.move_continuously()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active:
+                self.ship.move_continuously()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
     def _create_fleet(self):
@@ -166,19 +169,23 @@ class SpaceBrawl:
 
     def manage_ship_hit(self):
         """Handles a ship being hit by an alien."""
-        # Decrement ship count
-        self.stats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            # Decrement ship count
+            self.stats.ships_left -= 1
 
-        # Delete all aliens and bullets
-        self.aliens.empty()
-        self.bullets.empty()
+            # Delete all aliens and bullets
+            self.aliens.empty()
+            self.bullets.empty()
 
-        # Create a new fleet and center the ship
-        self._create_fleet()
-        self.ship.center_ship()
+            # Create a new fleet and center the ship
+            self._create_fleet()
+            self.ship.center_ship()
 
-        # Game pause, for user to recuperate.
-        sleep(0.5)
+            # Game pause, for user to recuperate.
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
+            sys.exit("Game Over!")
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
