@@ -146,6 +146,10 @@ class SpaceBrawl:
         self._check_fleet_edges()
         self.aliens.update()
 
+        # If alien collides with the ship, destroy the ship.
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("The ship is hit!")
+
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
         # Update main screen

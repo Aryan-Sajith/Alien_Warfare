@@ -1,12 +1,11 @@
 import pygame
 from pygame.sprite import Sprite
-from spaceship import SpaceShip
 
 
 class Alien(Sprite):
     """A class that represents an Alien from the fleet."""
 
-    def __init__(self, game_instance: SpaceShip):
+    def __init__(self, game_instance):
         """Initialize an alien from the fleet and set its starting position."""
         super().__init__()
         self.screen = game_instance.screen
