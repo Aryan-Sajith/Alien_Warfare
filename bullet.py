@@ -13,17 +13,17 @@ class Bullet(Sprite):
         self.color = self.settings.bullet_color
 
         # Creates a rectangular container for bullet at the right position
-        self.bullet_rectangle = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
-        self.bullet_rectangle.midtop = game_instance.ship.spaceship_rectangle.midtop
+        self.rect = pygame.Rect(0, 0, self.settings.bullet_width, self.settings.bullet_height)
+        self.rect.midtop = game_instance.ship.spaceship_rectangle.midtop
 
         # Stores bullet's y-coordinate for speed manipulation
-        self.y = float(self.bullet_rectangle.y)
+        self.y = float(self.rect.y)
 
     def update(self):
         """Moves the bullet up on screen."""
         self.y -= self.settings.bullet_speed
-        self.bullet_rectangle.y = self.y
+        self.rect.y = self.y
 
     def draw_bullet(self):
         """Draws a bullet to the screen"""
-        pygame.draw.rect(self.screen, self.color, self.bullet_rectangle)
+        pygame.draw.rect(self.screen, self.color, self.rect)

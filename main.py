@@ -75,13 +75,18 @@ class SpaceBrawl:
         self.bullets.add(new_bullet)
 
     def _update_bullets(self):
-        """Helper method for run_game() that updates bullets on screen and removes old ones"""
+        """Helper method for run_game() that updates bullets on screen and removes old/hit ones"""
         self.bullets.update()
 
+        # Remove bullets at bottom of screen.
         for bullet in self.bullets.copy():
             bullet: Bullet
-            if bullet.bullet_rectangle.bottom <= 0:
+            if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        # If bullet collided with alien, remove both.
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
 
     def _manage_events(self):
         """Helper method of run_game() to manage user events."""
