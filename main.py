@@ -1,7 +1,9 @@
 import sys
+from time import sleep
 import pygame
 
 from settings import Settings
+from game_stats import GameStats
 from spaceship import SpaceShip
 from bullet import Bullet
 from alien import Alien
@@ -20,6 +22,9 @@ class SpaceBrawl:
         self.settings.main_width = self.screen.get_rect().width
         self.settings.main_height = self.screen.get_rect().height
         pygame.display.set_caption("Space Brawl")
+
+        # Setup main statistics.
+        self.stats = GameStats(self)
 
         # Setup spaceship.
         self.ship = SpaceShip(self)
@@ -147,7 +152,23 @@ class SpaceBrawl:
 
         # If alien collides with the ship, destroy the ship.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("The ship is hit!")
+            self.manage_ship_hit()
+
+    def manage_ship_hit(self):
+        """Handles a ship being hit by an alien."""
+        # Decrement ship count
+        self.stats.ships_left -= 1
+
+        # Delete all aliens and bullets
+        self.aliens.empty()
+        self.bullets.empty()
+
+        # Create a new fleet and center the ship
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Game pause, for user to recuperate.
+        sleep(0.5)
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
