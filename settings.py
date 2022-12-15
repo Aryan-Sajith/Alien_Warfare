@@ -12,9 +12,9 @@ class Settings:
         self.spaceship_speed = 2
 
         # Bullet
-        self.bullet_speed = 1.5
-        self.bullet_width = 4
-        self.bullet_height = 16
+        self.bullet_speed = 2.5
+        self.bullet_width = 10
+        self.bullet_height = 20
         self.bullet_color = (255, 0, 0)
         self.bullets_limit = 3
 
