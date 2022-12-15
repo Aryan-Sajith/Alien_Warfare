@@ -75,7 +75,7 @@ class SpaceBrawl:
         self.bullets.add(new_bullet)
 
     def _update_bullets(self):
-        """Helper method for run_game() that updates bullets on screen and removes old/hit ones"""
+        """Manages changes associated to updating bullets."""
         self.bullets.update()
 
         # Remove bullets at bottom of screen.
@@ -86,6 +86,11 @@ class SpaceBrawl:
 
         # If bullet collided with alien, remove both.
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        # If all aliens are killed, empty bullets and create a new fleet.
+        if not self.aliens:
+            self.bullets.empty()
+            self._create_fleet()
 
 
     def _manage_events(self):
