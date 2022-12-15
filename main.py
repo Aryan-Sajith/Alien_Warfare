@@ -146,13 +146,23 @@ class SpaceBrawl:
         self.settings.fleet_direction *= -1
 
     def _update_aliens(self):
-        """Check if fleet at an edge, then update its position."""
+        """Update the aliens on screen."""
         self._check_fleet_edges()
         self.aliens.update()
 
         # If alien collides with the ship, destroy the ship.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self.manage_ship_hit()
+
+        # Handle aliens reaching bottom of screen.
+        self._check_aliens_bottom()
+
+    def _check_aliens_bottom(self):
+        """If any alien reaches the bottom, respond as if ship got hit."""
+        screen_rectangle = self.screen.get_rect()
+        for alien in self.aliens:
+            if alien.rect.bottom >= screen_rectangle.bottom:
+                self.manage_ship_hit()
 
     def manage_ship_hit(self):
         """Handles a ship being hit by an alien."""
