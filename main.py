@@ -117,6 +117,15 @@ class SpaceBrawl:
                 self._manage_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._manage_keyup_events(event)
+            # Mouse events
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_position = pygame.mouse.get_pos()
+                self._manage_mousedown_events(mouse_position)
+
+    def _manage_mousedown_events(self, mouse_position):
+        """Manages user mousedown events."""
+        if self.play_button.rect.collidepoint(mouse_position):
+            self.stats.game_active = True
 
     def _manage_keydown_events(self, event):
         """Helper method of _manage_events() that responds to key presses."""
