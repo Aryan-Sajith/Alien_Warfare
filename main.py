@@ -139,6 +139,9 @@ class SpaceBrawl:
             # Reset game activity flag
             self.stats.game_active = True
 
+            # Hide the mouse cursor
+            pygame.mouse.set_visible(False)
+
     def _manage_keydown_events(self, event):
         """Helper method of _manage_events() that responds to key presses."""
         if event.key == pygame.K_RIGHT:
