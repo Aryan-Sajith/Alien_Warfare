@@ -5,4 +5,4 @@ class GameStats:
         """Initialize statistics."""
         self.setting = game_instance.settings
         self.ships_left = self.setting.ship_limit
-        self.game_active = True
+        self.game_active = False
