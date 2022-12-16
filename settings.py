@@ -9,7 +9,7 @@ class Settings:
         self.background_color = (0, 0, 128)
 
         # Ship
-        self.spaceship_speed = 3
+        self.spaceship_speed = 5
         self.ship_limit = 3
 
         # Bullet
@@ -20,6 +20,6 @@ class Settings:
         self.bullets_limit = 3
 
         # Alien
-        self.alien_speed = 2
+        self.alien_speed = 3
         self.fleet_drop_speed = 10
         self.fleet_direction = 1  # 1 -> Right, -1 -> Left
