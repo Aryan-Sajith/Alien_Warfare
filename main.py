@@ -179,6 +179,7 @@ class SpaceBrawl:
         for alien in self.aliens:
             if alien.rect.bottom >= screen_rectangle.bottom:
                 self.manage_ship_hit()
+                break
 
     def manage_ship_hit(self):
         """Handles a ship being hit by an alien."""
