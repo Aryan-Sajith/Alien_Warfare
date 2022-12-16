@@ -3,6 +3,7 @@ import pygame.font
 
 class Button:
     """A class to manage buttons in the game."""
+
     def __init__(self, game_instance, message):
         """Initialize the button."""
         # Setup main surface
@@ -11,7 +12,7 @@ class Button:
 
         # Setup button properties
         self.width, self.height = 200, 50
-        self.button_color = (0, 255, 0)
+        self.button_color = (0, 200, 0)
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
@@ -27,3 +28,8 @@ class Button:
         self.message_image = self.font.render(message, True, self.text_color, self.button_color)
         self.message_image_rectangle = self.message_image.get_rect()
         self.message_image_rectangle.center = self.rect.center
+
+    def draw_button(self):
+        """Draws the button and then the message."""
+        self.screen.fill(self.button_color, self.rect)
+        self.screen.blit(self.message_image, self.message_image_rectangle)

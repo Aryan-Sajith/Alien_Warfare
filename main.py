@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from spaceship import SpaceShip
 from bullet import Bullet
 from alien import Alien
@@ -35,6 +36,9 @@ class SpaceBrawl:
 
         # Create the fleet of aliens!
         self._create_fleet()
+
+        # Setup button
+        self.play_button = Button(self, "Play")
 
     def run_game(self):
         """The main game loop."""
@@ -202,6 +206,10 @@ class SpaceBrawl:
 
         # Draws aliens
         self.aliens.draw(self.screen)
+
+        # Display button if the game is inactive
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Display updated screen
         pygame.display.flip()
