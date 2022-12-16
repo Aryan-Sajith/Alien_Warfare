@@ -125,7 +125,8 @@ class SpaceBrawl:
     def _manage_mousedown_events(self, mouse_position):
         """Manages user mousedown events."""
         # Handle the play button
-        if self.play_button.rect.collidepoint(mouse_position):
+        button_clicked = self.play_button.rect.collidepoint(mouse_position)
+        if button_clicked and not self.stats.game_active:
             # Reset game data
             self.aliens.empty()
             self.bullets.empty()
