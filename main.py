@@ -214,6 +214,7 @@ class SpaceBrawl:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
