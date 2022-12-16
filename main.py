@@ -124,7 +124,18 @@ class SpaceBrawl:
 
     def _manage_mousedown_events(self, mouse_position):
         """Manages user mousedown events."""
+        # Handle the play button
         if self.play_button.rect.collidepoint(mouse_position):
+            # Reset game data
+            self.aliens.empty()
+            self.bullets.empty()
+            self._create_fleet()
+            self.ship.center_ship()
+
+            # Reset stats
+            self.stats = GameStats(self)
+
+            # Reset game activity flag
             self.stats.game_active = True
 
     def _manage_keydown_events(self, event):
@@ -199,7 +210,6 @@ class SpaceBrawl:
             sleep(0.5)
         else:
             self.stats.game_active = False
-            sys.exit("Game Over!")
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
