@@ -140,7 +140,7 @@ class SpaceBrawl:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:  # Another exit condition
             sys.exit()
-        elif event.key == pygame.K_SPACE:
+        elif event.key == pygame.K_SPACE and self.stats.game_active:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
         elif event.key == pygame.K_p and not self.stats.game_active:
