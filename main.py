@@ -90,10 +90,10 @@ class SpaceBrawl:
         """Updates the bullets."""
         self.bullets.update()
 
-        # Remove bullets at bottom of screen.
+        # Remove bullets at top of screen.
         for bullet in self.bullets.copy():
             bullet: Bullet
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.y <= 0:
                 self.bullets.remove(bullet)
 
         self._manage_bullet_alien_collisions()
@@ -173,7 +173,7 @@ class SpaceBrawl:
 
     def _check_fleet_edges(self):
         """Change fleet motion if any alien reaches a screen edge."""
-        for alien in self.aliens.sprites():
+        for alien in self.aliens:
             alien: Alien
             if alien._check_edges():
                 self._change_fleet_motion()
@@ -181,7 +181,7 @@ class SpaceBrawl:
 
     def _change_fleet_motion(self):
         """Drop the entire fleet and change fleet direction."""
-        for alien in self.aliens.sprites():
+        for alien in self.aliens:
             alien: Alien
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
