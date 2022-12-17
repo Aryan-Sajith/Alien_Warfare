@@ -17,9 +17,6 @@ class Settings:
         self.bullet_color = (255, 0, 0)
         self.bullets_limit = 3
 
-        # Alien
-        self.fleet_drop_speed = 10
-
         # Rate of change
         self.speedup_scale = 1.1
         # Dynamic settings
@@ -31,9 +28,11 @@ class Settings:
         self.bullet_speed = 2
         self.alien_speed = 0.5
         self.fleet_direction = 1  # 1 -> Right, -1 -> Left
+        self.fleet_drop_speed = 10
 
     def increase_speed(self):
         """Increase dynamic settings."""
         self.spaceship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+        self.fleet_drop_speed += int(self.speedup_scale)
