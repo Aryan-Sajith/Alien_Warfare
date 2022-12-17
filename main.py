@@ -100,7 +100,7 @@ class SpaceBrawl:
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
         # If bullet collided with alien, remove both.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
 
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
@@ -128,6 +128,7 @@ class SpaceBrawl:
         # Handle the play button
         button_clicked = self.play_button.rect.collidepoint(mouse_position)
         if button_clicked and not self.stats.game_active:
+            self.settings.initialize_dynamic_settings()
             self._start_game()
 
     def _manage_keydown_events(self, event):
@@ -136,13 +137,14 @@ class SpaceBrawl:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_p:
-            self._start_game()
         elif event.key == pygame.K_q:  # Another exit condition
             sys.exit()
         elif event.key == pygame.K_SPACE:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
+        elif event.key == pygame.K_p and not self.stats.game_active:
+            self.settings.initialize_dynamic_settings()
+            self._start_game()
 
     def _start_game(self):
         """Starts the game."""
