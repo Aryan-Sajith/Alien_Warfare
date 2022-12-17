@@ -19,9 +19,10 @@ class SpaceBrawl:
         self.settings = Settings()
 
         # Setup main surface as full screen
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        self.settings.main_width = self.screen.get_rect().width
-        self.settings.main_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((1200, 800))
+        # self.screen = pygame.display.set_mode((0, 0), pygame.fullscreen)
+        # self.settings.main_width = self.screen.get_rect().width
+        # self.settings.main_height = self.screen.get_rect().height
         pygame.display.set_caption("Space Brawl")
 
         # Setup main statistics.
@@ -62,7 +63,7 @@ class SpaceBrawl:
 
         # Determine the number of rows of aliens
         ship_height = self.ship.rect.height
-        available_space_y = self.settings.main_height - (10 * alien_height) - ship_height
+        available_space_y = self.settings.main_height - (6 * alien_height) - ship_height
         number_rows = available_space_y // (2 * alien_height)
 
         # Create the full fleet of aliens.
@@ -100,7 +101,7 @@ class SpaceBrawl:
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
         # If bullet collided with alien, remove both.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
