@@ -106,6 +106,7 @@ class SpaceBrawl:
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _manage_events(self):
         """Helper method of run_game() to manage user events."""
