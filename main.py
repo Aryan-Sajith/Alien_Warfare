@@ -112,7 +112,7 @@ class SpaceBrawl:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Exit condition.
                 sys.exit()
-            # Continuous movement
+            # Key events
             elif event.type == pygame.KEYDOWN:
                 self._manage_keydown_events(event)
             elif event.type == pygame.KEYUP:
@@ -127,20 +127,7 @@ class SpaceBrawl:
         # Handle the play button
         button_clicked = self.play_button.rect.collidepoint(mouse_position)
         if button_clicked and not self.stats.game_active:
-            # Reset game data
-            self.aliens.empty()
-            self.bullets.empty()
-            self._create_fleet()
-            self.ship.center_ship()
-
-            # Reset stats
-            self.stats = GameStats(self)
-
-            # Reset game activity flag
-            self.stats.game_active = True
-
-            # Hide the mouse cursor
-            pygame.mouse.set_visible(False)
+            self._start_game()
 
     def _manage_keydown_events(self, event):
         """Helper method of _manage_events() that responds to key presses."""
@@ -148,11 +135,30 @@ class SpaceBrawl:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_p:
+            self._start_game()
         elif event.key == pygame.K_q:  # Another exit condition
             sys.exit()
         elif event.key == pygame.K_SPACE:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
+
+    def _start_game(self):
+        """Starts the game."""
+        # Reset game data
+        self.aliens.empty()
+        self.bullets.empty()
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # Reset stats
+        self.stats = GameStats(self)
+
+        # Reset game activity flag
+        self.stats.game_active = True
+
+        # Hide the mouse cursor
+        pygame.mouse.set_visible(False)
 
     def _manage_keyup_events(self, event):
         """Helper method of _manage_events() that responds to key releases."""
