@@ -18,7 +18,6 @@ class Button:
 
         # Rectangular container of button
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-
         # Positions button based on color
         self.position_button(self.button_color, game_instance)
 

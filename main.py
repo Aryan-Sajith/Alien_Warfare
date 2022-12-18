@@ -130,7 +130,6 @@ class SpaceBrawl:
         # Handle the play button
         button_clicked = self.play_button.rect.collidepoint(mouse_position)
         if button_clicked and not self.stats.game_active:
-            self.settings.initialize_dynamic_settings()
             self._start_game()
 
     def _manage_keydown_events(self, event):
@@ -145,11 +144,13 @@ class SpaceBrawl:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
         elif event.key == pygame.K_p and not self.stats.game_active:
-            self.settings.initialize_dynamic_settings()
             self._start_game()
 
     def _start_game(self):
         """Starts the game."""
+        # Initialize dynamic game settings
+        self.settings.initialize_dynamic_settings()
+
         # Reset game data
         self.aliens.empty()
         self.bullets.empty()

@@ -23,18 +23,27 @@ class Settings:
         self.normal_button_color = (255, 165, 0)
         self.hard_button_color = (255, 0, 0)
 
+        self.difficulty = 1
         # Rate of change
         self.speedup_scale = 1.1
         # Dynamic settings
         self.initialize_dynamic_settings()
 
+    def _set_difficulty(self, button_color):
+        """Sets difficulty based on button click"""
+        match button_color:
+            case self.easy_button_color:
+                self.difficulty -= 0.25
+            case self.hard_button_color:
+                self.difficulty += 0.25
+
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
-        self.spaceship_speed = 2
-        self.bullet_speed = 2
-        self.alien_speed = 0.5
+        self.spaceship_speed = 2 * self.difficulty
+        self.bullet_speed = 2 * self.difficulty
+        self.alien_speed = 0.5 * self.difficulty
         self.fleet_direction = 1  # 1 -> Right, -1 -> Left
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 10 * self.difficulty
 
     def increase_speed(self):
         """Increase dynamic settings."""
