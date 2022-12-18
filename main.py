@@ -128,18 +128,18 @@ class SpaceBrawl:
         """Manages user mousedown events."""
         # Play button
         playing_button_clicked = self.play_button.rect.collidepoint(mouse_position)
+        # Pressed play button
         if playing_button_clicked and not self.stats.game_active:
-            # Play button clicked
             self.stats.play_button_clicked = True
+        # Sets difficulty
         elif self.stats.play_button_clicked and not self.stats.game_active:
-            # Set difficulty
             self._setting_difficulty(mouse_position)
+        # Start the game
         elif self.stats.game_active and self.stats.difficulty_button_clicked:
-            # Start the game
             self._start_game()
 
     def _setting_difficulty(self, mouse_position):
-        """Set the difficulty and start the game."""
+        """Set the difficulty and relevant flags."""
         # Easy
         if self.easy_button.rect.collidepoint(mouse_position):
             self.settings._set_difficulty(self.easy_button.button_color)
@@ -252,9 +252,7 @@ class SpaceBrawl:
             # Game pause, for user to recuperate.
             sleep(0.5)
         else:
-            self.stats.game_active = False
-            self.stats.play_button_clicked = False
-            self.stats.difficulty_button_clicked = False
+            self.stats = GameStats(self)
             pygame.mouse.set_visible(True)
 
     def _update_screen(self):
