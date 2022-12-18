@@ -101,7 +101,7 @@ class SpaceBrawl:
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
         # If bullet collided with alien, remove both.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
 
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
@@ -130,6 +130,7 @@ class SpaceBrawl:
         playing_button_clicked = self.play_button.rect.collidepoint(mouse_position)
         # Pressed play button
         if playing_button_clicked and not self.stats.game_active:
+            self.settings.initialize_dynamic_settings()
             self.stats.play_button_clicked = True
         # Sets difficulty
         elif self.stats.play_button_clicked and not self.stats.game_active:
@@ -148,7 +149,7 @@ class SpaceBrawl:
         elif self.normal_button.rect.collidepoint(mouse_position):
             self.settings._set_difficulty(self.normal_button.button_color)
             self._set_difficulty_flags()
-            # Hard
+        # Hard
         elif self.hard_button.rect.collidepoint(mouse_position):
             self.settings._set_difficulty(self.hard_button.button_color)
             self._set_difficulty_flags()
@@ -175,17 +176,11 @@ class SpaceBrawl:
 
     def _start_game(self):
         """Starts the game."""
-        # Initialize dynamic game settings
-        self.settings.initialize_dynamic_settings()
-
         # Reset game data
         self.aliens.empty()
         self.bullets.empty()
         self._create_fleet()
         self.ship.center_ship()
-
-        # Reset stats
-        self.stats = GameStats(self)
 
         # Reset game activity flag
         self.stats.game_active = True

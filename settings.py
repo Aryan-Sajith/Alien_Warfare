@@ -12,7 +12,7 @@ class Settings:
         self.ship_limit = 3
 
         # Bullet
-        self.bullet_width = 10
+        self.bullet_width = 1000
         self.bullet_height = 20
         self.bullet_color = (255, 0, 0)
         self.bullets_limit = 3
@@ -23,8 +23,9 @@ class Settings:
         self.normal_button_color = (255, 165, 0)
         self.hard_button_color = (255, 0, 0)
 
-        # Adjustable difficulty rate
-        self.difficulty = 1
+        # Adjustable difficulty
+        self.difficulty = 1.05
+
         # Rate of change
         self.speedup_scale = 1.1
         # Dynamic settings
@@ -32,11 +33,15 @@ class Settings:
 
     def _set_difficulty(self, button_color):
         """Sets difficulty based on button click"""
+        # Reset difficulty
+        self.difficulty = 1.05
+
+        # Set difficulty based on button click
         match button_color:
             case self.easy_button_color:
-                self.difficulty -= 0.25
+                self.difficulty -= 0.05
             case self.hard_button_color:
-                self.difficulty += 0.25
+                self.difficulty += 0.05
             case _:
                 pass
 
@@ -47,7 +52,7 @@ class Settings:
         self.alien_speed = 0.5 * self.difficulty
         self.fleet_direction = 1  # 1 -> Right, -1 -> Left
         self.fleet_drop_speed = 10 * self.difficulty
-        self.speedup_scale *= self.difficulty
+        self.speedup_scale = 1.1 * self.difficulty
 
     def increase_speed(self):
         """Increase dynamic settings."""
