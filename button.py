@@ -31,10 +31,12 @@ class Button:
                 self.rect.center = self.screen_rectangle.center
             case game_instance.settings.easy_button_color:
                 new_center = list(self.screen_rectangle.center)
-                new_center[-1] -= 100
+                new_center[-1] += 300
                 self.rect.center = tuple(new_center)
             case game_instance.settings.normal_button_color:
-                self.rect.center = self.screen_rectangle.center
+                new_center = list(self.screen_rectangle.center)
+                new_center[-1] += 200
+                self.rect.center = tuple(new_center)
             case game_instance.settings.hard_button_color:
                 new_center = list(self.screen_rectangle.center)
                 new_center[-1] += 100

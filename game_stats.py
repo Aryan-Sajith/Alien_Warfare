@@ -6,3 +6,5 @@ class GameStats:
         self.setting = game_instance.settings
         self.ships_left = self.setting.ship_limit
         self.game_active = False
+        self.play_button_clicked = False
+        self.difficulty_button_clicked = False

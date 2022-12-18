@@ -41,7 +41,6 @@ class SpaceBrawl:
         self.normal_button = Button(self, "Normal", self.settings.normal_button_color)
         self.hard_button = Button(self, "Hard", self.settings.hard_button_color)
 
-
     def run_game(self):
         """The main game loop."""
         while True:
@@ -127,10 +126,38 @@ class SpaceBrawl:
 
     def _manage_mousedown_events(self, mouse_position):
         """Manages user mousedown events."""
-        # Handle the play button
-        button_clicked = self.play_button.rect.collidepoint(mouse_position)
-        if button_clicked and not self.stats.game_active:
+        # Play button
+        playing_button_clicked = self.play_button.rect.collidepoint(mouse_position)
+        if playing_button_clicked and not self.stats.game_active:
+            # Play button clicked
+            self.stats.play_button_clicked = True
+        elif self.stats.play_button_clicked and not self.stats.game_active:
+            # Set difficulty
+            self._setting_difficulty(mouse_position)
+        elif self.stats.game_active and self.stats.difficulty_button_clicked:
+            # Start the game
             self._start_game()
+
+    def _setting_difficulty(self, mouse_position):
+        """Set the difficulty and start the game."""
+        # Easy
+        if self.easy_button.rect.collidepoint(mouse_position):
+            self.settings._set_difficulty(self.easy_button.button_color)
+            self.stats.difficulty_button_clicked = True
+            self.stats.game_active = True
+            pygame.mouse.set_visible(False)
+        # Normal
+        elif self.normal_button.rect.collidepoint(mouse_position):
+            self.settings._set_difficulty(self.normal_button.button_color)
+            self.stats.difficulty_button_clicked = True
+            self.stats.game_active = True
+            pygame.mouse.set_visible(False)
+        # Hard
+        elif self.hard_button.rect.collidepoint(mouse_position):
+            self.settings._set_difficulty(self.hard_button.button_color)
+            self.stats.difficulty_button_clicked = True
+            self.stats.game_active = True
+            pygame.mouse.set_visible(False)
 
     def _manage_keydown_events(self, event):
         """Helper method of _manage_events() that responds to key presses."""
@@ -144,7 +171,7 @@ class SpaceBrawl:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
         elif event.key == pygame.K_p and not self.stats.game_active:
-            self._start_game()
+            self.stats.play_button_clicked = True
 
     def _start_game(self):
         """Starts the game."""
@@ -226,6 +253,8 @@ class SpaceBrawl:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            self.stats.play_button_clicked = False
+            self.stats.difficulty_button_clicked = False
             pygame.mouse.set_visible(True)
 
     def _update_screen(self):
@@ -244,9 +273,14 @@ class SpaceBrawl:
         # Draws aliens
         self.aliens.draw(self.screen)
 
-        # Display button if the game is inactive
-        if not self.stats.game_active:
+        # Display play button if game inactive, and it wasn't clicked
+        if not self.stats.game_active and not self.stats.play_button_clicked:
             self.play_button.draw_button()
+        # Display difficulty buttons if game inactive, and play button was clicked.
+        elif not self.stats.game_active and not self.stats.difficulty_button_clicked:
+            self.easy_button.draw_button()
+            self.normal_button.draw_button()
+            self.hard_button.draw_button()
 
         # Display updated screen
         pygame.display.flip()

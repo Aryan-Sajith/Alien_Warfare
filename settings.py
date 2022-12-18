@@ -36,6 +36,8 @@ class Settings:
                 self.difficulty -= 0.25
             case self.hard_button_color:
                 self.difficulty += 0.25
+            case _:
+                pass
 
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
