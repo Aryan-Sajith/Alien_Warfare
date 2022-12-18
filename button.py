@@ -18,7 +18,16 @@ class Button:
 
         # Rectangular container of button
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        match self.button_color:
+
+        # Positions button based on color
+        self.position_button(self.button_color, game_instance)
+
+        # Add message onto button
+        self._prepare_message(message)
+
+    def position_button(self, color, game_instance):
+        """Positions the button based on color"""
+        match color:
             case game_instance.settings.play_button_color:
                 self.rect.center = self.screen_rectangle.center
             case game_instance.settings.easy_button_color:
@@ -31,9 +40,6 @@ class Button:
                 new_center = list(self.screen_rectangle.center)
                 new_center[-1] += 100
                 self.rect.center = tuple(new_center)
-
-        # Add message onto button
-        self._prepare_message(message)
 
     def _prepare_message(self, message):
         """Turns message into rendered image and centers onto the button."""
