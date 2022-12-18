@@ -17,6 +17,12 @@ class Settings:
         self.bullet_color = (255, 0, 0)
         self.bullets_limit = 3
 
+        # Buttons
+        self.play_button_color = (0, 200, 0)
+        self.easy_button_color = (0, 255, 0)
+        self.normal_button_color = (255, 69, 0)
+        self.hard_button_color = (255, 0, 0)
+
         # Rate of change
         self.speedup_scale = 1.1
         # Dynamic settings

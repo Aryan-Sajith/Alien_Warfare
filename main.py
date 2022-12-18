@@ -38,8 +38,8 @@ class SpaceBrawl:
         # Create the fleet of aliens!
         self._create_fleet()
 
-        # Setup button
-        self.play_button = Button(self, "Play")
+        # Setup buttons
+        self.play_button = Button(self, "Play", self.settings.play_button_color)
 
     def run_game(self):
         """The main game loop."""

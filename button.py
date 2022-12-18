@@ -4,7 +4,7 @@ import pygame.font
 class Button:
     """A class to manage buttons in the game."""
 
-    def __init__(self, game_instance, message):
+    def __init__(self, game_instance, message, color):
         """Initialize the button."""
         # Setup main surface
         self.screen = game_instance.screen
@@ -12,7 +12,7 @@ class Button:
 
         # Setup button properties
         self.width, self.height = 200, 50
-        self.button_color = (0, 200, 0)
+        self.button_color = color
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
