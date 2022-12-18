@@ -18,7 +18,19 @@ class Button:
 
         # Rectangular container of button
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        self.rect.center = self.screen_rectangle.center
+        match self.button_color:
+            case game_instance.settings.play_button_color:
+                self.rect.center = self.screen_rectangle.center
+            case game_instance.settings.easy_button_color:
+                new_center = list(self.screen_rectangle.center)
+                new_center[-1] -= 100
+                self.rect.center = tuple(new_center)
+            case game_instance.settings.normal_button_color:
+                self.rect.center = self.screen_rectangle.center
+            case game_instance.settings.hard_button_color:
+                new_center = list(self.screen_rectangle.center)
+                new_center[-1] += 100
+                self.rect.center = tuple(new_center)
 
         # Add message onto button
         self._prepare_message(message)

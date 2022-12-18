@@ -20,7 +20,7 @@ class Settings:
         # Buttons
         self.play_button_color = (0, 200, 0)
         self.easy_button_color = (0, 255, 0)
-        self.normal_button_color = (255, 69, 0)
+        self.normal_button_color = (255, 165, 0)
         self.hard_button_color = (255, 0, 0)
 
         # Rate of change

@@ -19,10 +19,7 @@ class SpaceBrawl:
         self.settings = Settings()
 
         # Setup main surface as full screen
-        self.screen = pygame.display.set_mode((1200, 800))
-        # self.screen = pygame.display.set_mode((0, 0), pygame.fullscreen)
-        # self.settings.main_width = self.screen.get_rect().width
-        # self.settings.main_height = self.screen.get_rect().height
+        self.screen = pygame.display.set_mode((self.settings.main_width, self.settings.main_height))
         pygame.display.set_caption("Space Brawl")
 
         # Setup main statistics.
@@ -40,6 +37,10 @@ class SpaceBrawl:
 
         # Setup buttons
         self.play_button = Button(self, "Play", self.settings.play_button_color)
+        self.easy_button = Button(self, "Easy", self.settings.easy_button_color)
+        self.normal_button = Button(self, "Normal", self.settings.normal_button_color)
+        self.hard_button = Button(self, "Hard", self.settings.hard_button_color)
+
 
     def run_game(self):
         """The main game loop."""
