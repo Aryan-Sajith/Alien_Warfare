@@ -23,6 +23,7 @@ class Settings:
         self.normal_button_color = (255, 165, 0)
         self.hard_button_color = (255, 0, 0)
 
+        # Adjustable difficulty rate
         self.difficulty = 1
         # Rate of change
         self.speedup_scale = 1.1
