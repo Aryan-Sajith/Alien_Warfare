@@ -113,9 +113,14 @@ class SpaceBrawl:
 
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
+            # Reset fleet
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            # Increment the level
+            self.stats.level += 1
+            self.scoreboard.prep_level()
 
     def _manage_events(self):
         """Helper method of run_game() to manage user events."""
@@ -140,9 +145,10 @@ class SpaceBrawl:
         if playing_button_clicked and not self.stats.game_active:
             self.settings.initialize_dynamic_settings()
             self.stats.play_button_clicked = True
-        # Sets difficulty, then starts the game
+        # Sets difficulty, resets level, then starts the game
         elif self.stats.play_button_clicked and not self.stats.game_active:
             self._setting_difficulty(mouse_position)
+            self.scoreboard.prep_level()
             self._start_game()
 
     def _setting_difficulty(self, mouse_position):
@@ -279,7 +285,7 @@ class SpaceBrawl:
         self.aliens.draw(self.screen)
 
         # Draw scoreboard
-        self.scoreboard.show_score()
+        self.scoreboard.show_scoreboard()
 
         # Display play button if game inactive, and it wasn't clicked
         if not self.stats.game_active and not self.stats.play_button_clicked:

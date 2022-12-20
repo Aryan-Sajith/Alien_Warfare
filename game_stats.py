@@ -13,6 +13,7 @@ class GameStats:
         self.setting = game_instance.settings
         self.ships_left = self.setting.ship_limit
         self.score = 0
+        self.level = 1
 
         # Flags
         self.game_active = False

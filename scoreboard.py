@@ -18,6 +18,7 @@ class ScoreBoard:
         # Prepare scoreboard
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
 
     def prep_score(self):
         """Turn score into a rendered image positioned on main surface."""
@@ -30,6 +31,17 @@ class ScoreBoard:
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
         self.score_rect.top = 20
+
+    def prep_level(self):
+        """Turn level into rendered image on main screen."""
+        # Setup level
+        level_str = str(self.stats.level)
+        self.level_image = self.font.render(level_str, True, self.text_color, self.settings.background_color)
+
+        # Position level below score
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10
 
     def prep_high_score(self):
         """Turn high score into rendered image on main screen."""
@@ -44,7 +56,8 @@ class ScoreBoard:
         self.high_score_rect.x = self.screen_rect.centerx
         self.high_score_rect.top = 20
 
-    def show_score(self):
-        """Draw score onto main surface."""
+    def show_scoreboard(self):
+        """Draw scoreboard onto main surface."""
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image, self.level_rect)
