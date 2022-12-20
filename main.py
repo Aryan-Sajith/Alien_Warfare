@@ -27,7 +27,7 @@ class SpaceBrawl:
         # Setup scoreboard
         self.scoreboard = ScoreBoard(self)
 
-        # Setup spaceship.
+        # Setup spaceship
         self.ship = SpaceShip(self)
 
         # Setup bullets & aliens as a Sprite group
@@ -286,6 +286,7 @@ class SpaceBrawl:
 
         # Draw scoreboard
         self.scoreboard.show_scoreboard()
+        self.scoreboard.ships.draw(self.screen)
 
         # Display play button if game inactive, and it wasn't clicked
         if not self.stats.game_active and not self.stats.play_button_clicked:

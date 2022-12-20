@@ -1,4 +1,7 @@
 import pygame.font
+from pygame.sprite import Group
+
+from spaceship import SpaceShip
 
 
 class ScoreBoard:
@@ -11,6 +14,7 @@ class ScoreBoard:
         self.screen_rect = self.screen.get_rect()
         self.settings = game_instance.settings
         self.stats = game_instance.stats
+        self.game_instance = game_instance
 
         # Score font settings
         self.text_color = (255, 255, 255)
@@ -19,6 +23,7 @@ class ScoreBoard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ships()
 
     def prep_score(self):
         """Turn score into a rendered image positioned on main surface."""
@@ -55,6 +60,17 @@ class ScoreBoard:
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.x = self.screen_rect.centerx
         self.high_score_rect.top = 20
+
+    def prep_ships(self):
+        """Shows how many ships are left."""
+        self.ships = Group()
+
+        for ship_number in range(self.stats.ships_left):
+            ship = SpaceShip(self.game_instance)
+            ship.rect.x = 10 + 2 * ship_number * ship.rect.width
+            ship.rect.top = 20
+
+            self.ships.add(ship)
 
     def show_scoreboard(self):
         """Draw scoreboard onto main surface."""
