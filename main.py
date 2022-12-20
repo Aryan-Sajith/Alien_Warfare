@@ -140,11 +140,9 @@ class SpaceBrawl:
         if playing_button_clicked and not self.stats.game_active:
             self.settings.initialize_dynamic_settings()
             self.stats.play_button_clicked = True
-        # Sets difficulty
+        # Sets difficulty, then starts the game
         elif self.stats.play_button_clicked and not self.stats.game_active:
             self._setting_difficulty(mouse_position)
-        # Start the game
-        elif self.stats.difficulty_button_clicked and self.stats.game_active:
             self._start_game()
 
     def _setting_difficulty(self, mouse_position):
@@ -165,7 +163,6 @@ class SpaceBrawl:
     def _set_difficulty_flags(self):
         """Sets relevant difficulty flags when a difficulty button is clicked."""
         self.stats.difficulty_button_clicked = True
-        self.stats.game_active = True
         pygame.mouse.set_visible(False)
 
     def _manage_keydown_events(self, event):
@@ -184,6 +181,9 @@ class SpaceBrawl:
 
     def _start_game(self):
         """Starts the game."""
+        # Turn game activity flag on
+        self.stats.game_active = True
+
         # Reset game data
         self.aliens.empty()
         self.bullets.empty()
@@ -253,7 +253,7 @@ class SpaceBrawl:
             sleep(0.5)
         else:
             # Reset stats
-            self.stats = GameStats(self)
+            self.stats.reset_stats(self)
             # Reset scoreboard
             self.scoreboard = ScoreBoard(self)
             pygame.mouse.set_visible(True)
