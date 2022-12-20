@@ -189,4 +189,4 @@ cython_debug/
 #.idea/
 
 # Output data
-/Users/aryansajith/PycharmProjects/projects/games/Space Brawl/output/
+output/
