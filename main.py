@@ -105,6 +105,11 @@ class SpaceBrawl:
         # If bullet collided with alien, remove both.
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
+        # If collision occurred, increment score and update on screen
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.scoreboard.prep_score()
+
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
             self.bullets.empty()

@@ -53,6 +53,7 @@ class Settings:
         self.fleet_direction = 1  # 1 -> Right, -1 -> Left
         self.fleet_drop_speed = 10 * self.difficulty
         self.speedup_scale = 1.1 * self.difficulty
+        self.alien_points = 50 * self.difficulty
 
     def increase_speed(self):
         """Increase dynamic settings."""
