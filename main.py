@@ -311,10 +311,18 @@ class SpaceBrawl:
 
         # High score storage
         high_score_dir = f"{output_dir}high_score.txt"
-        # Initially create high_score.txt file
+        # Create high_score.txt
+        self._create_highscore_document(high_score, high_score_dir)
+        # Update high_score.txt
+        self._update_highscore_document(high_score, high_score_dir)
+
+    def _create_highscore_document(self, high_score, high_score_dir):
+        """Initially creates the output/high_score.txt file with data"""
         with open(high_score_dir, 'w') as f:
             f.write(str(high_score))
-        # Update high_score.txt
+
+    def _update_highscore_document(self, high_score, high_score_dir):
+        """Updates the output/high_score.txt file with data"""
         with open(high_score_dir, 'r') as f:
             file_high_score = int(float(f.read()))
         with open(high_score_dir, 'w') as f:
