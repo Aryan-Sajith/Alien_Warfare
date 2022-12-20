@@ -261,8 +261,10 @@ class SpaceBrawl:
         else:  # Game reset
             # Update high score
             self.stats.high_score = max(self.stats.high_score, self.stats.score)
+
             # Reset stats
             self.stats.reset_stats(self)
+
             # Reset scoreboard
             self.scoreboard.prep_score()
             self.scoreboard.prep_high_score()
