@@ -255,7 +255,7 @@ class SpaceBrawl:
             # Reset stats
             self.stats.reset_stats(self)
             # Reset scoreboard
-            self.scoreboard = ScoreBoard(self)
+            self.scoreboard.prep_score()
             pygame.mouse.set_visible(True)
 
     def _update_screen(self):
