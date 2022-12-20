@@ -311,9 +311,15 @@ class SpaceBrawl:
 
         # High score storage
         high_score_dir = f"{output_dir}high_score.txt"
+        # Initially create high_score.txt file
         with open(high_score_dir, 'w') as f:
-            high_score = f"{high_score:,}"  # Formats high score with commas
-            f.write(high_score)
+            f.write(str(high_score))
+        # Update high_score.txt
+        with open(high_score_dir, 'r') as f:
+            file_high_score = int(float(f.read()))
+        with open(high_score_dir, 'w') as f:
+            overall_high_score_str = max(high_score, file_high_score)
+            f.write(str(overall_high_score_str))
 
 
 if __name__ == '__main__':
