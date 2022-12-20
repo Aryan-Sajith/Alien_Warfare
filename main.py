@@ -251,7 +251,10 @@ class SpaceBrawl:
             # Game pause, for user to recuperate.
             sleep(0.5)
         else:
+            # Reset stats
             self.stats = GameStats(self)
+            # Reset scoreboard
+            self.scoreboard = ScoreBoard(self)
             pygame.mouse.set_visible(True)
 
     def _update_screen(self):
