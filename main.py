@@ -79,7 +79,7 @@ class SpaceBrawl:
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width * (1 + 2 * alien_number)
         alien.rect.x = alien.x
-        alien.y = alien_height * (1 + 2 * row_number)
+        alien.y = alien_height * (1 + 2 * row_number) + 35  # Add spacing to prevent overlap with ships left
         alien.rect.y = alien.y
         self.aliens.add(alien)
 
