@@ -252,10 +252,14 @@ class SpaceBrawl:
             # Game pause, for user to recuperate.
             sleep(0.5)
         else:
+            # Update high score
+            self.stats.high_score = max(self.stats.high_score, self.stats.score)
             # Reset stats
             self.stats.reset_stats(self)
             # Reset scoreboard
             self.scoreboard.prep_score()
+            self.scoreboard.prep_high_score()
+
             pygame.mouse.set_visible(True)
 
     def _update_screen(self):
@@ -274,7 +278,7 @@ class SpaceBrawl:
         # Draws aliens
         self.aliens.draw(self.screen)
 
-        # Draw the score
+        # Draw scoreboard
         self.scoreboard.show_score()
 
         # Display play button if game inactive, and it wasn't clicked

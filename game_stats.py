@@ -3,8 +3,9 @@ class GameStats:
 
     def __init__(self, game_instance):
         """Initialize statistics."""
+        self.high_score = 0
 
-        # Setup dynamic stats
+        # Setup fully dynamic stats
         self.reset_stats(game_instance)
 
     def reset_stats(self, game_instance):
