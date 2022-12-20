@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import ScoreBoard
 from button import Button
 from spaceship import SpaceShip
 from bullet import Bullet
@@ -17,13 +18,14 @@ class SpaceBrawl:
         """Initialize the game."""
         pygame.init()
         self.settings = Settings()
+        self.stats = GameStats(self)
 
         # Setup main surface as full screen
         self.screen = pygame.display.set_mode((self.settings.main_width, self.settings.main_height))
         pygame.display.set_caption("Space Brawl")
 
-        # Setup main statistics.
-        self.stats = GameStats(self)
+        # Setup scoreboard
+        self.scoreboard = ScoreBoard(self)
 
         # Setup spaceship.
         self.ship = SpaceShip(self)
@@ -101,7 +103,7 @@ class SpaceBrawl:
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
         # If bullet collided with alien, remove both.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         # If all aliens are killed, empty bullets and create a new fleet.
         if not self.aliens:
@@ -252,7 +254,7 @@ class SpaceBrawl:
 
     def _update_screen(self):
         """Helper method of run_game to update main surface and flip screen."""
-        # Update main screen
+        # Update background color
         self.screen.fill(self.settings.background_color)
 
         # Draws rocket ship
@@ -265,6 +267,9 @@ class SpaceBrawl:
 
         # Draws aliens
         self.aliens.draw(self.screen)
+
+        # Draw the score
+        self.scoreboard.show_score()
 
         # Display play button if game inactive, and it wasn't clicked
         if not self.stats.game_active and not self.stats.play_button_clicked:
