@@ -126,6 +126,7 @@ class SpaceBrawl:
         """Helper method of run_game() to manage user events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Exit condition.
+                self.output_gamedata(self.stats.high_score)  # Save high score for later
                 sys.exit()
             # Key events
             elif event.type == pygame.KEYDOWN:
