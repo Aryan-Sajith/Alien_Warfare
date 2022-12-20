@@ -28,6 +28,8 @@ class Settings:
 
         # Rate of change
         self.speedup_scale = 1.1
+        # Alien points rate of change
+        self.alien_points_speedup_scale = 2 * self.speedup_scale
         # Dynamic settings
         self.initialize_dynamic_settings()
 
@@ -61,3 +63,4 @@ class Settings:
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
         self.fleet_drop_speed += int(self.speedup_scale)
+        self.alien_points = int(self.alien_points * self.alien_points_speedup_scale)
