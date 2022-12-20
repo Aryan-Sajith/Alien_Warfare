@@ -258,7 +258,7 @@ class SpaceBrawl:
 
             # Game pause, for user to recuperate.
             sleep(0.5)
-        else:
+        else:  # Game reset
             # Update high score
             self.stats.high_score = max(self.stats.high_score, self.stats.score)
             # Reset stats
@@ -266,6 +266,7 @@ class SpaceBrawl:
             # Reset scoreboard
             self.scoreboard.prep_score()
             self.scoreboard.prep_high_score()
+            self.scoreboard.prep_ships()
 
             pygame.mouse.set_visible(True)
 
