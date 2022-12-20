@@ -189,4 +189,4 @@ cython_debug/
 #.idea/
 
 # Output data
-output
+output/
