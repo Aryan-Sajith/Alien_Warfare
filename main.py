@@ -103,7 +103,7 @@ class SpaceBrawl:
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
         # If bullet collided with alien, remove both.
-        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, False, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         # If collision occurred, increment score and update on screen
         if collisions:
