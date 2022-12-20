@@ -107,7 +107,8 @@ class SpaceBrawl:
 
         # If collision occurred, increment score and update on screen
         if collisions:
-            self.stats.score += self.settings.alien_points
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
             self.scoreboard.prep_score()
 
         # If all aliens are killed, empty bullets and create a new fleet.
