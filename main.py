@@ -177,7 +177,8 @@ class SpaceBrawl:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
-        elif event.key == pygame.K_q:  # Another exit condition
+        elif event.key == pygame.K_q:  # Exit condition
+            self.output_gamedata(self.stats.high_score)  # Save high score for later
             sys.exit()
         elif event.key == pygame.K_SPACE and self.stats.game_active:
             if len(self.bullets) < self.settings.bullets_limit:
@@ -303,6 +304,16 @@ class SpaceBrawl:
 
         # Display updated screen
         pygame.display.flip()
+
+    def output_gamedata(self, high_score):
+        """Outputs game data to a file for later usage."""
+        output_dir = "output/"
+
+        # High score storage
+        high_score_dir = f"{output_dir}high_score.txt"
+        with open(high_score_dir, 'w') as f:
+            high_score = f"{high_score:,}"  # Formats high score with commas
+            f.write(high_score)
 
 
 if __name__ == '__main__':
