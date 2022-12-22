@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from file_io import FileIO
 from scoreboard import ScoreBoard
 from button import Button
 from spaceship import SpaceShip
@@ -17,6 +18,9 @@ class SpaceBrawl:
     def __init__(self):
         """Initialize the game."""
         pygame.init()
+        # Setup file IO instances
+        self.highscore_io = FileIO("output/high_score.txt")
+        # Essential game data
         self.settings = Settings()
         self.stats = GameStats(self)
 
@@ -126,7 +130,8 @@ class SpaceBrawl:
         """Helper method of run_game() to manage user events."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # Exit condition.
-                self.output_gamedata(self.stats.high_score)  # Save high score for later
+                # Save high score for later
+                self.highscore_io.output_gamedata(self.stats.high_score)
                 sys.exit()
             # Key events
             elif event.type == pygame.KEYDOWN:
@@ -179,7 +184,8 @@ class SpaceBrawl:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
         elif event.key == pygame.K_q:  # Exit condition
-            self.output_gamedata(self.stats.high_score)  # Save high score for later
+            # Save high score for later
+            self.highscore_io.output_gamedata(self.stats.high_score)
             sys.exit()
         elif event.key == pygame.K_SPACE and self.stats.game_active:
             if len(self.bullets) < self.settings.bullets_limit:
@@ -305,30 +311,6 @@ class SpaceBrawl:
 
         # Display updated screen
         pygame.display.flip()
-
-    def output_gamedata(self, high_score):
-        """Outputs game data to a file for later usage."""
-        output_dir = "output/"
-
-        # High score storage
-        high_score_dir = f"{output_dir}high_score.txt"
-        # Create high_score.txt
-        self._create_highscore_document(high_score, high_score_dir)
-        # Update high_score.txt
-        self._update_highscore_document(high_score, high_score_dir)
-
-    def _create_highscore_document(self, high_score, high_score_dir):
-        """Initially creates the output/high_score.txt file with data"""
-        with open(high_score_dir, 'w') as f:
-            f.write(str(high_score))
-
-    def _update_highscore_document(self, high_score, high_score_dir):
-        """Updates the output/high_score.txt file with data"""
-        with open(high_score_dir, 'r') as f:
-            file_high_score = int(float(f.read()))
-        with open(high_score_dir, 'w') as f:
-            overall_high_score_str = max(high_score, file_high_score)
-            f.write(str(overall_high_score_str))
 
 
 if __name__ == '__main__':
