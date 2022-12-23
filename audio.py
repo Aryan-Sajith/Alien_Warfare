@@ -6,6 +6,10 @@ class Audio:
 
     def __init__(self):
         """Initialize the audio used throughout the game."""
+        # Background music
+        self.play_background_music()
+
+        # Sounds
         self.spaceship_laser = pygame.mixer.Sound("sounds/spaceship_laser.mp3")
         self.alien_bullet_collision = pygame.mixer.Sound("sounds/alien_bullet_collision.mp3")
 
@@ -18,3 +22,8 @@ class Audio:
         """Plays the collision sound of the alien and bullet."""
         self.alien_bullet_collision.play(1000)
         self.alien_bullet_collision.fadeout(1000)
+
+    def play_background_music(self):
+        """Plays the background music"""
+        pygame.mixer.music.load("sounds/apocalypse_background.mp3")
+        pygame.mixer.music.play(-1)
