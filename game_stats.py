@@ -1,5 +1,5 @@
 class GameStats:
-    """Tracks in-game data for Space Brawl."""
+    """Tracks in-game data for Alien Warfare."""
 
     def __init__(self, game_instance):
         """Initialize statistics."""

@@ -1,5 +1,5 @@
 class Settings:
-    """Auxiliary class for all settings of Space Brawl"""
+    """Auxiliary class for all settings of Alien Warfare"""
 
     def __init__(self):
         """Setup game settings"""

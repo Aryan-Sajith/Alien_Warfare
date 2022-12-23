@@ -3,7 +3,7 @@ from pygame.mixer import music
 
 
 class Audio:
-    """A class to manage audio files for Space Brawl"""
+    """A class to manage audio files for Alien Warfare"""
 
     def __init__(self):
         """Initialize the audio used throughout the game."""

@@ -14,7 +14,7 @@ from alien import Alien
 
 
 class SpaceBrawl:
-    """Main class to manage Space Brawl's functionality."""
+    """Main class to manage Alien Warfare's functionality."""
 
     def __init__(self):
         """Initialize the game."""
@@ -29,7 +29,7 @@ class SpaceBrawl:
 
         # Setup main surface as full screen
         self.screen = pygame.display.set_mode((self.settings.main_width, self.settings.main_height))
-        pygame.display.set_caption("Space Brawl")
+        pygame.display.set_caption("Alien Warfare")
 
         # Setup scoreboard
         self.scoreboard = ScoreBoard(self)
