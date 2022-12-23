@@ -13,7 +13,7 @@ from bullet import Bullet
 from alien import Alien
 
 
-class SpaceBrawl:
+class AlienWarfare:
     """Main class to manage Alien Warfare's functionality."""
 
     def __init__(self):
@@ -322,5 +322,5 @@ class SpaceBrawl:
 
 if __name__ == '__main__':
     # Runs the game.
-    game = SpaceBrawl()
+    game = AlienWarfare()
     game.run_game()
