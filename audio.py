@@ -1,4 +1,5 @@
-import pygame
+from pygame.mixer import Sound
+from pygame.mixer import music
 
 
 class Audio:
@@ -6,12 +7,16 @@ class Audio:
 
     def __init__(self):
         """Initialize the audio used throughout the game."""
-        # Background music
+        # Setup background music
+        self.setup_background_music()
+        # Play background music
         self.play_background_music()
 
-        # Sounds
-        self.spaceship_laser = pygame.mixer.Sound("sounds/spaceship_laser.mp3")
-        self.alien_bullet_collision = pygame.mixer.Sound("sounds/alien_bullet_collision.mp3")
+        # Setup Sounds
+        self.spaceship_laser = Sound("sounds/spaceship_laser.mp3")
+        self.spaceship_laser.set_volume(0.03)
+        self.alien_bullet_collision = Sound("sounds/alien_bullet_collision.mp3")
+        self.alien_bullet_collision.set_volume(0.03)
 
     def play_spaceship_laser_sound(self):
         """Plays the spaceship laser sound."""
@@ -23,7 +28,11 @@ class Audio:
         self.alien_bullet_collision.play(1000)
         self.alien_bullet_collision.fadeout(1000)
 
+    def setup_background_music(self):
+        """Set up the background music"""
+        music.load("sounds/apocalypse_background.mp3")
+        music.set_volume(0.04)
+
     def play_background_music(self):
         """Plays the background music"""
-        pygame.mixer.music.load("sounds/apocalypse_background.mp3")
-        pygame.mixer.music.play(-1)
+        music.play(-1)
