@@ -4,6 +4,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from audio import Audio
 from file_io import FileIO
 from scoreboard import ScoreBoard
 from button import Button
@@ -18,8 +19,10 @@ class SpaceBrawl:
     def __init__(self):
         """Initialize the game."""
         pygame.init()
-        # Setup file IO instances
+        # Setup file IO instance(s)
         self.highscore_io = FileIO("output/high_score.txt")
+        # Setup game audio
+        self.audio = Audio()
         # Essential game data
         self.settings = Settings()
         self.stats = GameStats(self)
@@ -96,7 +99,7 @@ class SpaceBrawl:
         """Updates the bullets."""
         self.bullets.update()
 
-        # Remove bullets at top of screen.
+        # Remove bullet and it's sound at top of screen
         for bullet in self.bullets.copy():
             bullet: Bullet
             if bullet.rect.y <= 0:
@@ -106,7 +109,7 @@ class SpaceBrawl:
 
     def _manage_bullet_alien_collisions(self):
         """Manages bullet and alien collisions."""
-        # If bullet collided with alien, remove both.
+        # If bullet collided with alien, remove both
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         if collisions:
@@ -190,6 +193,7 @@ class SpaceBrawl:
         elif event.key == pygame.K_SPACE and self.stats.game_active:
             if len(self.bullets) < self.settings.bullets_limit:
                 self._fire_bullet()
+                self.audio.play_spaceship_laser_sound()  # Spaceship laser sound!
         elif event.key == pygame.K_p and not self.stats.game_active:
             self.stats.play_button_clicked = True
 
