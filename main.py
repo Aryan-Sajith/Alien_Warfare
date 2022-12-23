@@ -113,6 +113,9 @@ class SpaceBrawl:
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
         if collisions:
+            # Audio handling
+            self.audio.play_alien_bullet_collision_sound()
+
             # Score handling
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
