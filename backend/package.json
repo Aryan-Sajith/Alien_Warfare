@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend for the alien warfare game",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "test": "test"
   },
