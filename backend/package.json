@@ -2,8 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend for the alien warfare game",
-  "main": "app.ts",
+  "main": "index.ts",
   "scripts": {
+    "start": "ts-node-dev src/app.ts",
+    "build": "tsc",
     "test": "test"
   },
   "repository": {
